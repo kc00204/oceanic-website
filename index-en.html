@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceanic United Machinery — Engineering · AI · Hong Kong</title>
+<meta name="description" content="Oceanic United Machinery - AI-powered engineering for Hong Kong's critical infrastructure. Electrical contracting, structural inspection, predictive maintenance.">
+<meta name="keywords" content="electrical contracting Hong Kong, structural inspection, AI maintenance, MTR, container port, Kwai Tsing">
+<meta property="og:title" content="Oceanic United Machinery — Engineering · AI · Hong Kong">
+<meta property="og:description" content="Next-generation engineering solutions for critical infrastructure with AI-driven predictive maintenance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://oumc.net">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d1117">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --fg: #f0f6fc;
+    --fg2: #8b949e;
+    --fg3: #6e7681;
+    --accent-green: #1f6feb;
+    --accent-teal: #238636;
+    --accent-cyan: #58a6ff;
+    --accent-orange: #fb8500;
+    --line: #30363d;
+    --line2: #21262d;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    background:var(--bg); color:var(--fg);
+    font-family:'Inter','Noto Sans TC',system-ui,sans-serif;
+    font-weight:400; line-height:1.5; overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; text-decoration:none; }
+  .mono { font-family:'Space Grotesk',monospace; }
+
+  /* ANIMATED GRADIENT BACKGROUND */
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:linear-gradient(135deg, rgba(31,111,235,0.05) 0%, rgba(35,134,54,0.03) 50%, rgba(88,166,255,0.05) 100%);
+    animation:gradient 20s ease infinite;
+  }
+  @keyframes gradient {
+    0%, 100% { opacity:0.5; }
+    50% { opacity:0.8; }
+  }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:24px 40px; backdrop-filter:blur(20px);
+    background:rgba(13,17,23,0.8);
+    border-bottom:2px solid var(--line);
+    box-shadow:0 4px 20px rgba(31,111,235,0.1);
+  }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .brand-mark {
+    width:40px; height:40px; border:2px solid var(--accent-cyan);
+    border-radius:8px; display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk'; font-weight:700; font-size:1rem;
+    background:linear-gradient(135deg, rgba(88,166,255,0.1) 0%, rgba(35,134,54,0.05) 100%);
+    position:relative;
+  }
+  .brand-mark::after {
+    content:'⚙'; color:var(--accent-cyan); font-size:1.2rem;
+  }
+  .brand-text { font-family:'Space Grotesk'; font-size:.78rem; letter-spacing:2px; text-transform:uppercase; line-height:1.2; }
+  .brand-text small { display:block; color:var(--accent-green); font-size:.65rem; letter-spacing:1.5px; margin-top:2px; }
+  nav ul { display:flex; gap:36px; list-style:none; }
+  nav ul a {
+    font-size:.78rem; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--fg2); transition:all .3s; position:relative;
+  }
+  nav ul a:hover { color:var(--accent-cyan); }
+  nav ul a.num { color:var(--accent-green); margin-right:6px; font-family:'Space Grotesk'; font-weight:600; }
+  .nav-clock {
+    font-family:'Space Grotesk'; font-size:.72rem; letter-spacing:1px;
+    color:var(--fg3); display:flex; align-items:center; gap:8px;
+  }
+  .dot { width:6px; height:6px; border-radius:50%; background:var(--accent-green); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1; box-shadow:0 0 0 0 rgba(35,134,54,0.7);} 50%{opacity:.5; box-shadow:0 0 0 8px rgba(35,134,54,0.1);} }
+
+  /* HERO */
+  .hero {
+    min-height:100vh; padding:140px 40px 40px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    position:relative; z-index:1;
+  }
+  .hero-meta {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    font-family:'Space Grotesk'; font-size:.72rem; letter-spacing:1.5px;
+    color:var(--fg3); text-transform:uppercase;
+    border-bottom:1px solid var(--line); padding-bottom:16px; margin-bottom:60px;
+  }
+  .hero-meta span { display:block; }
+  .hero-meta .mr { color:var(--accent-cyan); font-weight:600; }
+  .hero-headline {
+    font-size:clamp(3rem, 10vw, 11rem);
+    font-weight:900; line-height:.92; letter-spacing:-.04em;
+    font-family:'Inter','Noto Sans TC',sans-serif;
+  }
+  .hero-headline .accent-1 { color:var(--accent-cyan); }
+  .hero-headline .accent-2 { color:var(--accent-green); }
+  .hero-headline .thin { font-weight:300; color:var(--fg2); }
+  .hero-bottom {
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:60px;
+    margin-top:auto; padding-top:60px; border-top:1px solid var(--line);
+  }
+  .hero-bottom .block { }
+  .hero-bottom .label {
+    font-family:'Space Grotesk'; font-size:.68rem; letter-spacing:2px;
+    color:var(--accent-green); text-transform:uppercase; margin-bottom:12px;
+    display:flex; align-items:center; gap:8px; font-weight:600;
+  }
+  .hero-bottom .label::before { content:'▸'; color:var(--accent-cyan); font-size:.8rem; }
+  .hero-bottom p { font-size:.92rem; color:var(--fg2); line-height:1.6; max-width:280px; }
+  .scroll-ind {
+    position:absolute; right:40px; top:50%; transform:translateY(-50%) rotate(90deg);
+    transform-origin:center; font-family:'Space Grotesk'; font-size:.7rem;
+    letter-spacing:3px; color:var(--accent-green); text-transform:uppercase; font-weight:600;
+    display:flex; align-items:center; gap:12px;
+    animation:float 3s ease-in-out infinite;
+  }
+  .scroll-ind::after { content:''; width:40px; height:2px; background:linear-gradient(90deg, var(--accent-green) 0%, transparent 100%); }
+  @keyframes float { 0%,100%{transform:translateY(-50%) rotate(90deg) translateX(0);} 50%{transform:translateY(-50%) rotate(90deg) translateX(8px);} }
+
+  /* MARQUEE */
+  .marquee {
+    overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:24px 0; background:var(--bg2);
+  }
+  .marquee-inner {
+    display:flex; gap:60px; white-space:nowrap;
+    animation:scroll 40s linear infinite;
+    font-family:'Space Grotesk'; font-size:1.1rem;
+    letter-spacing:2px; text-transform:uppercase; color:var(--fg);
+  }
+  .marquee-inner span { display:flex; align-items:center; gap:60px; }
+  .marquee-inner span::after { content:'◆'; color:var(--accent-cyan); }
+  @keyframes scroll { to { transform:translateX(-50%); } }
+
+  /* SECTION LAYOUT */
+  section { padding:120px 40px; position:relative; z-index:1; }
+  .section-head {
+    display:grid; grid-template-columns:auto 1fr; gap:40px;
+    margin-bottom:80px; align-items:flex-end;
+  }
+  .section-num {
+    font-family:'Space Grotesk'; font-size:.75rem;
+    letter-spacing:2px; color:var(--accent-green);
+    border-top:2px solid var(--accent-green); padding-top:16px; min-width:60px; font-weight:600;
+  }
+  .section-title {
+    font-size:clamp(2.5rem, 6vw, 5.5rem);
+    font-weight:900; line-height:1; letter-spacing:-.03em;
+    max-width:1000px;
+  }
+  .section-title .accent { color:var(--accent-cyan); }
+  .section-title .thin { font-style:italic; font-weight:300; color:var(--fg2); }
+
+  /* ABOUT */
+  #about { border-top:1px solid var(--line); }
+  .about-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:80px;
+    align-items:start;
+  }
+  .about-text p {
+    font-size:1.1rem; line-height:1.7; color:var(--fg2); margin-bottom:24px;
+  }
+  .about-text p strong { color:var(--accent-cyan); font-weight:600; }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+  .about-stats .stat {
+    padding:32px 0; border-top:1px solid var(--line);
+    background:linear-gradient(135deg, rgba(88,166,255,0.05) 0%, transparent 100%);
+    padding:32px; border-top:none; margin-bottom:0;
+  }
+  .stat-num {
+    font-family:'Space Grotesk'; font-size:3.5rem; font-weight:700;
+    line-height:1; letter-spacing:-.02em; color:var(--accent-cyan); margin-bottom:8px;
+  }
+  .stat-num .plus { color:var(--accent-green); }
+  .stat-label {
+    font-family:'Space Grotesk'; font-size:.72rem; letter-spacing:2px;
+    text-transform:uppercase; color:var(--fg3);
+  }
+
+  /* SERVICES — BENTO */
+  #services { background:var(--bg2); border-top:1px solid var(--line); }
+  .services-grid {
+    display:grid; grid-template-columns:repeat(6, 1fr); gap:2px;
+    background:var(--line2);
+    border:1px solid var(--line);
+  }
+  .svc-card {
+    background:var(--bg2); padding:40px; min-height:280px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:all .4s; position:relative; overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .svc-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+    background:linear-gradient(135deg, rgba(88,166,255,0.1) 0%, transparent 100%);
+    opacity:0; transition:opacity .4s; z-index:-1;
+  }
+  .svc-card:hover::before { opacity:1; }
+  .svc-card:hover { border-color:var(--accent-cyan); background:var(--bg3); }
+  .svc-card.w2 { grid-column:span 2; }
+  .svc-card.w3 { grid-column:span 3; }
+  .svc-card.w4 { grid-column:span 4; }
+  .svc-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .svc-num {
+    font-family:'Space Grotesk'; font-size:.72rem;
+    letter-spacing:2px; color:var(--accent-green); font-weight:600;
+  }
+  .svc-arrow { color:var(--fg3); font-size:1.2rem; transition:.3s; }
+  .svc-card:hover .svc-arrow { color:var(--accent-cyan); transform:translate(4px,-4px); }
+  .svc-title {
+    font-size:1.4rem; font-weight:700; line-height:1.3;
+    margin-bottom:12px;
+  }
+  .svc-title .en { display:block; font-family:'Space Grotesk'; font-size:.75rem; letter-spacing:2px; color:var(--accent-green); text-transform:uppercase; margin-bottom:6px; font-weight:600; }
+  .svc-desc { font-size:.95rem; line-height:1.6; color:var(--fg2); }
+
+  /* PROJECTS LIST */
+  .projects-list { border-top:1px solid var(--line); }
+  .proj-row {
+    display:grid; grid-template-columns:60px 1fr 180px 80px 40px;
+    gap:40px; align-items:center; padding:40px 0;
+    border-bottom:1px solid var(--line);
+    transition:all .3s; padding-left:20px; padding-right:20px;
+    margin-left:-20px; margin-right:-20px;
+  }
+  .proj-row:hover { background:rgba(88,166,255,.05); border-bottom-color:var(--accent-cyan); }
+  .proj-id { font-family:'Space Grotesk'; font-size:.85rem; letter-spacing:2px; color:var(--accent-green); font-weight:600; }
+  .proj-name { font-size:1.1rem; font-weight:600; line-height:1.3; }
+  .proj-name span { display:block; font-weight:400; color:var(--fg2); font-size:0.95rem; }
+  .proj-cat { font-family:'Space Grotesk'; font-size:.75rem; letter-spacing:1.5px; color:var(--fg3); text-transform:uppercase; }
+  .proj-year { font-family:'Space Grotesk'; font-size:.8rem; letter-spacing:1.5px; color:var(--accent-cyan); font-weight:700; }
+  .proj-arrow { color:var(--fg3); font-size:1.1rem; }
+
+  /* PARTNERS SECTION */
+  #partners { border-top:1px solid var(--line); }
+  .partners-grid {
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:40px;
+  }
+  .partner-card {
+    padding:40px; border:1px solid var(--line); background:var(--bg2);
+    transition:all .4s; position:relative; overflow:hidden;
+  }
+  .partner-card::before {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg, rgba(35,134,54,0.1) 0%, transparent 100%);
+    opacity:0; transition:opacity .4s;
+  }
+  .partner-card:hover { background:var(--bg3); border-color:var(--accent-green); }
+  .partner-card:hover::before { opacity:1; }
+  .partner-card > * { position:relative; z-index:1; }
+  .partner-logo { font-size:2.5rem; margin-bottom:16px; }
+  .partner-name {
+    font-size:1.2rem; font-weight:700; margin-bottom:8px;
+    color:var(--fg);
+  }
+  .partner-role {
+    font-family:'Space Grotesk'; font-size:.75rem; letter-spacing:2px;
+    text-transform:uppercase; color:var(--accent-green); margin-bottom:16px; font-weight:600;
+  }
+  .partner-desc {
+    font-size:.95rem; line-height:1.6; color:var(--fg2);
+  }
+
+  /* CAPABILITIES */
+  #capabilities {
+    border-top:1px solid var(--line);
+  }
+  .cap-wrap {
+    display:grid; grid-template-columns:1fr auto; gap:80px; align-items:start;
+  }
+  .cap-list { display:grid; gap:0; }
+  .cap-item {
+    display:grid; grid-template-columns:1fr auto;
+    gap:40px; align-items:center;
+    padding:32px 0; border-bottom:1px solid var(--line);
+  }
+  .cap-item:first-child { border-top:1px solid var(--line); }
+  .cap-item:hover { background:rgba(88,166,255,.02); }
+  .cap-name {
+    font-weight:600; font-size:1rem; line-height:1.3;
+  }
+  .cap-name .small {
+    display:block; font-family:'Space Grotesk'; font-size:.72rem;
+    letter-spacing:1.5px; color:var(--accent-green); margin-top:6px;
+    text-transform:uppercase; font-weight:600;
+  }
+  .cap-check {
+    font-family:'Space Grotesk'; font-size:.75rem; letter-spacing:2px;
+    color:var(--accent-cyan); text-transform:uppercase; font-weight:700;
+  }
+  .cap-visual { text-align:center; font-size:6rem; opacity:.2; }
+
+  /* CONTACT */
+  #contact { border-top:1px solid var(--line); }
+  .contact-big {
+    font-size:clamp(2rem, 5vw, 4rem); font-weight:900;
+    line-height:1.1; margin-bottom:80px; letter-spacing:-.02em;
+  }
+  .contact-big .accent { color:var(--accent-cyan); }
+  .contact-big .thin { font-style:italic; font-weight:300; color:var(--fg2); }
+  .contact-big a {
+    color:var(--accent-green); text-decoration:none; border-bottom:2px solid var(--accent-green);
+    transition:.3s;
+  }
+  .contact-big a:hover { border-bottom-color:var(--accent-cyan); }
+  .contact-grid {
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:40px;
+  }
+  .contact-block { }
+  .contact-block .label {
+    font-family:'Space Grotesk'; font-size:.68rem; letter-spacing:2px;
+    color:var(--accent-green); text-transform:uppercase; margin-bottom:12px; font-weight:600;
+    display:flex; align-items:center; gap:6px;
+  }
+  .contact-block p {
+    font-size:1rem; line-height:1.6; color:var(--fg2);
+  }
+  .contact-block a {
+    color:var(--accent-cyan); text-decoration:none;
+  }
+  .contact-block a:hover { text-decoration:underline; }
+
+  /* FOOTER */
+  footer {
+    display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:60px;
+    padding:80px 40px 40px; border-top:1px solid var(--line);
+    background:var(--bg2);
+  }
+  .footer-brand .lg {
+    font-size:2rem; font-weight:900; line-height:1;
+    margin-bottom:16px; letter-spacing:-.02em;
+  }
+  .footer-brand p { font-size:.9rem; line-height:1.6; color:var(--fg2); }
+  .footer-col h4 {
+    font-size:.85rem; letter-spacing:2px; text-transform:uppercase;
+    color:var(--accent-green); margin-bottom:16px; font-weight:700;
+  }
+  .footer-col a {
+    display:block; font-size:.9rem; color:var(--fg2);
+    margin-bottom:12px; transition:color .3s;
+  }
+  .footer-col a:hover { color:var(--accent-cyan); }
+  .footer-bottom {
+    grid-column:1/-1; display:flex; justify-content:space-between;
+    align-items:center; padding-top:32px; border-top:1px solid var(--line);
+    font-size:.8rem; color:var(--fg3);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:1024px) {
+    .about-grid { grid-template-columns:1fr; gap:40px; }
+    .services-grid { grid-template-columns:repeat(4, 1fr); }
+    .partners-grid { grid-template-columns:repeat(2, 1fr); }
+    .contact-grid { grid-template-columns:repeat(2, 1fr); }
+    footer { grid-template-columns:1fr; }
+  }
+  @media (max-width:640px) {
+    section { padding:80px 20px; }
+    nav { padding:16px 20px; }
+    .services-grid { grid-template-columns:1fr; }
+    .svc-card { min-height:auto; }
+    .partners-grid { grid-template-columns:1fr; }
+    .contact-grid { grid-template-columns:1fr; }
+    .proj-row { grid-template-columns:1fr; gap:16px; }
+    .proj-id { display:none; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Oceanic United Machinery Company Ltd.",
+  "alternateName": "OUMC",
+  "url": "https://oumc.net",
+  "logo": "https://oumc.net/logo.png",
+  "description": "AI-powered engineering for Hong Kong's critical infrastructure. Electrical contracting, structural inspection, predictive maintenance.",
+  "sameAs": [
+    "https://www.linkedin.com/company/oceanic-united-machinery",
+    "https://github.com/kc00204/oceanic-website"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+852-9194-5675",
+    "contactType": "Customer Support",
+    "areaServed": "HK",
+    "availableLanguage": ["zh-HK", "en-US"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "G/F, 95 & 99 Kok Cheung St",
+    "addressLocality": "Tai Kok Tsui",
+    "addressRegion": "Kowloon",
+    "postalCode": "",
+    "addressCountry": "HK"
+  },
+  "foundingDate": "2004",
+  "founder": {
+    "@type": "Person",
+    "name": "Kwok Yu Cheng"
+  },
+  "employees": [
+    {
+      "@type": "Person",
+      "name": "Kwok Yu Cheng",
+      "jobTitle": "Director",
+      "email": "oceanic952019@gmail.com"
+    }
+  ],
+  "areaServed": ["HK"],
+  "knowsAbout": [
+    "Electrical Contracting",
+    "Structural Inspection",
+    "AI Maintenance Systems",
+    "Port Engineering",
+    "MTR Operations Support",
+    "Environmental Compliance"
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <div class="brand-text">Oceanic<br>United</div>
+  </div>
+  <ul>
+    <li><a href="#about"><span class="num">01</span>About</a></li>
+    <li><a href="#services"><span class="num">02</span>Services</a></li>
+    <li><a href="#projects"><span class="num">03</span>Projects</a></li>
+    <li><a href="#partners"><span class="num">04</span>Partners</a></li>
+    <li><a href="#contact"><span class="num">05</span>Contact</a></li>
+  </ul>
+  <div class="nav-clock">
+    <div class="dot"></div>
+    <span>HONG KONG · LIVE</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-meta">
+    <span>Oceanic United Machinery</span>
+    <span class="mr">EST. 2004 · 40+ YEARS</span>
+  </div>
+  <h1 class="hero-headline">Engineering<br><span class="thin">the future with</span><br><span class="accent-1">AI</span> <span class="thin">×</span> <span class="accent-2">Sustainability</span></h1>
+  <div class="hero-bottom">
+    <div class="block">
+      <div class="label">Next Generation</div>
+      <p>AI-driven predictive maintenance, autonomous inspection systems, intelligent resource optimization</p>
+    </div>
+    <div class="block">
+      <div class="label">Port · Container · Infrastructure</div>
+      <p>Kwai Tsing Terminal, T·PARK Environmental, MTR Operations, Structural Safety</p>
+    </div>
+    <div class="block">
+      <div class="label">24/7 Global Ready</div>
+      <p>Real-time monitoring, emergency response, mission-critical systems, sustainability compliance</p>
+    </div>
+  </div>
+  <div class="scroll-ind">EXPLORE</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>AI PREDICTIVE MAINTENANCE</span>
+    <span>PORT AUTOMATION</span>
+    <span>ENVIRONMENTAL SYSTEMS</span>
+    <span>SMART INFRASTRUCTURE</span>
+    <span>STRUCTURAL INTELLIGENCE</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-head">
+    <div class="section-num">01 / ABOUT</div>
+    <h2 class="section-title">Next-gen engineering<br><span class="thin">for Hong Kong's critical infrastructure.</span></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Oceanic United Machinery Company Ltd. 紮根香港，專注於為大型基礎設施提供 <strong>機電維修、結構檢查、鋼絲繩更換、油漆</strong> 及 <strong>人工智能監測</strong> 服務。同時亦為 Hit 貨櫃碼頭、家居裝修及室外防水等多元項目提供專業工程解決方案。</p>
+      <p>我們由 <strong>Kwok Yu Cheng</strong> 董事領導，擁有 <strong>特許工程師 (Chartered Engineer)</strong> 及 <strong>機械工程師 (Mechanical Engineer)</strong> 資格，持有香港政府認可嘅電業承辦商牌照，並為原廠認可物料供應商。</p>
+      <p>多年來服務貨櫃碼頭、環境保護署、港鐵等重要客戶，致力以高標準工程質量，守護香港嘅每一個齒輪。透過人工智能與物聯網技術，我們正在重新定義工程維護的未來。</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat"><div class="stat-num">40<span class="plus">+</span></div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-num">100,000<span class="plus">+</span></div><div class="stat-label">Projects Delivered</div></div>
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Emergency Response</div></div>
+      <div class="stat"><div class="stat-num">100<span class="plus">%</span></div><div class="stat-label">Licensed & Certified</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES BENTO -->
+<section id="services">
+  <div class="section-head">
+    <div class="section-num">02 / SERVICES</div>
+    <h2 class="section-title">What<br>we deliver<span style="color:var(--accent-cyan);">.</span></h2>
+  </div>
+
+  <div class="services-grid">
+    <div class="svc-card w3 featured">
+      <div class="svc-top">
+        <div class="svc-num">(01)</div>
+        <div class="svc-arrow">↗</div>
+      </div>
+      <div>
+        <div class="svc-title">
+          <span class="en">LICENSED ELECTRICAL CONTRACTING</span>
+          電業承辦工程
+        </div>
+        <p class="svc-desc">為客戶度身訂造不同嘅電力系統及物料解決方案。大型電力系統安裝、線纜更換、電力升級及日常維護。依據香港《電業條例》持牌承辦，提供由 380V 至 11kV 嘅全面電力解決方案，確保系統穩定性及安全合規。</p>
+      </div>
+    </div>
+    <div class="svc-card w3">
+      <div class="svc-top"><div class="svc-num">(02)</div><div class="svc-arrow">↗</div></div>
+      <div>
+        <div class="svc-title"><span class="en">MTR MAINTENANCE</span>MTR Maintenance Services</div>
+        <p class="svc-desc">為港鐵提供機電設備定期保養計劃、24/7 緊急搶修及 Taylor MaK 原廠認可物料供應。專業團隊確保所有系統穩定運行，保障港鐵日常營運。</p>
+      </div>
+    </div>
+    <div class="svc-card w2">
+      <div class="svc-top"><div class="svc-num">(03)</div><div class="svc-arrow">↗</div></div>
+      <div>
+        <div class="svc-title" style="font-size:1.4rem;"><span class="en">KWAI TSING</span>Kwai Tsing Terminal Engineering</div>
+        <p class="svc-desc" style="font-size:0.85rem; margin-top:8px;">機械、電力及結構工程一體化服務</p>
+      </div>
+    </div>
+    <div class="svc-card w2">
+      <div class="svc-top"><div class="svc-num">(04)</div><div class="svc-arrow">↗</div></div>
+      <div>
+        <div class="svc-title" style="font-size:1.4rem;"><span class="en">EPD · T·PARK</span>Environmental Engineering</div>
+        <p class="svc-desc" style="font-size:0.85rem; margin-top:8px;">環境設施機械及電力維護</p>
+      </div>
+    </div>
+    <div class="svc-card w2">
+      <div class="svc-top"><div class="svc-num">(05)</div><div class="svc-arrow">↗</div></div>
+      <div>
+        <div class="svc-title" style="font-size:1.4rem;"><span class="en">STRUCTURAL</span>Structural Safety Inspection</div>
+        <p class="svc-desc" style="font-size:0.85rem; margin-top:8px;">專業結構檢測及評估服務</p>
+      </div>
+    </div>
+    <div class="svc-card w6" style="grid-column:span 6;">
+      <div class="svc-top"><div class="svc-num">(06) — LATEST INNOVATION</div><div class="svc-arrow">↗</div></div>
+      <div>
+        <div class="svc-title" style="font-size:2.2rem;">
+          <span class="en">AI + MACHINE LEARNING — PREDICTIVE MAINTENANCE</span>
+          AI + Machine Learning — Predictive Maintenance
+        </div>
+        <p class="svc-desc" style="max-width:600px;">將人工智能技術融入傳統工程，透過實時數據監測、故障預測算法及智慧化設施管理，大幅提升營運效率、延長設備壽命並減少非預期停機時間。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-head">
+    <div class="section-num">03 / SELECTED</div>
+    <h2 class="section-title">Selected<br><span class="thin">commissions.</span></h2>
+  </div>
+
+  <div class="projects-list">
+    <div class="proj-row">
+      <div class="proj-id">001</div>
+      <div class="proj-name">Kwai Tsing Container Terminal<br><span style="font-weight:300;font-size:1rem;color:var(--fg2);">葵青貨櫃碼頭機電工程</span></div>
+      <div class="proj-cat">Mechanical · Electrical · Structural</div>
+      <div class="proj-year">2024</div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-id">002</div>
+      <div class="proj-name">Hong Kong International Airport Expansion<br><span style="font-weight:300;font-size:1rem;color:var(--fg2);">香港國際機場擴建工程</span></div>
+      <div class="proj-cat">Electrical · Control Systems</div>
+      <div class="proj-year">2023</div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-id">003</div>
+      <div class="proj-name">Environmental Protection Dept. T·Park Facility<br><span style="font-weight:300;font-size:1rem;color:var(--fg2);">環境保護署 T·PARK 設施維保</span></div>
+      <div class="proj-cat">Maintenance · Optimization</div>
+      <div class="proj-year">2023</div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-id">004</div>
+      <div class="proj-name">MTR Emergency Response & System Integrity<br><span style="font-weight:300;font-size:1rem;color:var(--fg2);">MTR Emergency Response & System Integrity</span></div>
+      <div class="proj-cat">24/7 Critical Support</div>
+      <div class="proj-year">Ongoing</div>
+      <div class="proj-arrow">↗</div>
+    </div>
+    <div class="proj-row">
+      <div class="proj-id">005</div>
+      <div class="proj-name">AI-Powered Structural Monitoring System<br><span style="font-weight:300;font-size:1rem;color:var(--fg2);">AI-Powered Structural Monitoring System</span></div>
+      <div class="proj-cat">Innovation · Analytics</div>
+      <div class="proj-year">2024</div>
+      <div class="proj-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="section-head">
+    <div class="section-num">04 / PARTNERS</div>
+    <h2 class="section-title">Strategic<br><span class="thin">collaborations.</span></h2>
+  </div>
+
+  <div class="partners-grid">
+    <div class="partner-card">
+      <div class="partner-logo">🏗️</div>
+      <div class="partner-name">Kwai Tsing Container Terminal</div>
+      <div class="partner-role">Strategic Partner</div>
+      <div class="partner-desc">綜合港口機械及電力系統整合，提供一體化工程解決方案。</div>
+    </div>
+    <div class="partner-card">
+      <div class="partner-logo">🌱</div>
+      <div class="partner-name">EPD · T·PARK Facility</div>
+      <div class="partner-role">Environmental Partner</div>
+      <div class="partner-desc">環境保護署認可供應商，專注可持續性與環境合規。</div>
+    </div>
+    <div class="partner-card">
+      <div class="partner-logo">🚇</div>
+      <div class="partner-name">MTR Operations</div>
+      <div class="partner-role">Temporary Contract</div>
+      <div class="partner-desc">為港鐵提供機電設備維護、應急搶修及原廠物料支援。</div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-head">
+    <div class="section-num">05 / CAPABILITIES</div>
+    <h2 class="section-title">Technical<br><span class="thin">excellence.</span></h2>
+  </div>
+
+  <div class="cap-wrap">
+    <div class="cap-list">
+      <div class="cap-item">
+        <div class="cap-name">Licensed Electrical Contracting<br><span class="small">Category 1 · Hong Kong</span></div>
+        <div class="cap-check">✓ VERIFIED</div>
+      </div>
+      <div class="cap-item">
+        <div class="cap-name">Structural Engineering & Assessment<br><span class="small">ISO 17025 Accredited</span></div>
+        <div class="cap-check">✓ CERTIFIED</div>
+      </div>
+      <div class="cap-item">
+        <div class="cap-name">AI & Predictive Maintenance Systems<br><span class="small">Real-time IoT Integration</span></div>
+        <div class="cap-check">✓ ADVANCED</div>
+      </div>
+      <div class="cap-item">
+        <div class="cap-name">24/7 Emergency Response<br><span class="small">Mission-Critical Operations</span></div>
+        <div class="cap-check">✓ OPERATIONAL</div>
+      </div>
+      <div class="cap-item">
+        <div class="cap-name">Environmental Compliance<br><span class="small">Hong Kong Regulations</span></div>
+        <div class="cap-check">✓ COMPLIANT</div>
+      </div>
+    </div>
+    <div class="cap-visual">⚙️</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-big">Get in touch to<br>explore <span class="accent">tomorrow's infrastructure</span> <span class="thin">today.</span></div>
+
+  <div class="contact-grid">
+    <div class="contact-block">
+      <div class="label">Email</div>
+      <p><a href="mailto:oceanic952019@gmail.com">oceanic952019@gmail.com</a></p>
+    </div>
+    <div class="contact-block">
+      <div class="label">Phone</div>
+      <p><a href="tel:+85291945675">(852) 9194-5675</a><br><a href="tel:+85223965338">(852) 2396-5338</a></p>
+    </div>
+    <div class="contact-block">
+      <div class="label">Office</div>
+      <p>G/F, 95 & 99 Kok Cheung St<br>Tai Kok Tsui, Kowloon</p>
+    </div>
+    <div class="contact-block">
+      <div class="label">Fax</div>
+      <p>(852) 2787-2003</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="lg">Oceanic<br>United</div>
+    <p>Engineering Hong Kong's infrastructure through innovation, expertise, and unwavering commitment to excellence. AI-driven solutions for a sustainable future.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <a href="#services">Electrical Contracting</a>
+    <a href="#services">MTR Maintenance</a>
+    <a href="#services">Structural Inspection</a>
+    <a href="#services">AI Monitoring</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Oceanic United Machinery Ltd. All rights reserved.</span>
+    <span>EST. 2004 · HONG KONG</span>
+  </div>
+</footer>
+
+</body>
+</html>

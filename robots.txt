@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /_next
+Disallow: /.git
+
+Sitemap: https://oumc.net/sitemap.xml

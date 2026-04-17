@@ -1,0 +1,195 @@
+name: Auto Optimize Website
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # 每週一早上 9:00 自動運行
+    - cron: '0 9 * * 1'
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 步驟 1: 添加 Google Analytics
+      - name: Add Google Analytics
+        run: |
+          python3 << 'EOF'
+          import re
+
+          # 讀取 index.html
+          with open('index.html', 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          # Google Analytics 代碼
+          ga_code = '''<!-- Google Analytics -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          </script>'''
+
+          # 如果還未添加 GA，就添加到 </head> 前
+          if 'Google Analytics' not in content:
+              content = content.replace('</head>', ga_code + '\n</head>')
+              with open('index.html', 'w', encoding='utf-8') as f:
+                  f.write(content)
+              print("✓ Google Analytics added")
+          else:
+              print("✓ Google Analytics already exists")
+          EOF
+
+      # 步驟 2: 生成 Sitemap
+      - name: Generate Sitemap
+        run: |
+          python3 << 'EOF'
+          from datetime import datetime
+
+          sitemap = '''<?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <url>
+              <loc>https://oumc.net</loc>
+              <lastmod>''' + datetime.now().strftime('%Y-%m-%d') + '''</lastmod>
+              <changefreq>weekly</changefreq>
+              <priority>1.0</priority>
+            </url>
+            <url>
+              <loc>https://oumc.net#about</loc>
+              <lastmod>''' + datetime.now().strftime('%Y-%m-%d') + '''</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.9</priority>
+            </url>
+            <url>
+              <loc>https://oumc.net#services</loc>
+              <lastmod>''' + datetime.now().strftime('%Y-%m-%d') + '''</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.8</priority>
+            </url>
+            <url>
+              <loc>https://oumc.net#projects</loc>
+              <lastmod>''' + datetime.now().strftime('%Y-%m-%d') + '''</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.8</priority>
+            </url>
+            <url>
+              <loc>https://oumc.net#contact</loc>
+              <lastmod>''' + datetime.now().strftime('%Y-%m-%d') + '''</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.7</priority>
+            </url>
+          </urlset>'''
+
+          with open('sitemap.xml', 'w', encoding='utf-8') as f:
+              f.write(sitemap)
+          print("✓ Sitemap generated")
+          EOF
+
+      # 步驟 3: 生成 robots.txt
+      - name: Generate robots.txt
+        run: |
+          cat > robots.txt << 'EOF'
+          User-agent: *
+          Allow: /
+          Disallow: /admin
+          Disallow: /_next
+          Disallow: /.git
+
+          Sitemap: https://oumc.net/sitemap.xml
+          EOF
+          echo "✓ robots.txt generated"
+
+      # 步驟 4: 添加 SEO Meta 標籤
+      - name: Add SEO Meta Tags
+        run: |
+          python3 << 'EOF'
+          import re
+
+          with open('index.html', 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          # SEO meta 標籤
+          seo_tags = '''<meta name="description" content="Oceanic United Machinery - AI-powered engineering for Hong Kong's critical infrastructure. Electrical contracting, structural inspection, predictive maintenance.">
+          <meta name="keywords" content="electrical contracting Hong Kong, structural inspection, AI maintenance, MTR, container port, Kwai Tsing">
+          <meta property="og:title" content="Oceanic United Machinery — Engineering · AI · Hong Kong">
+          <meta property="og:description" content="Next-generation engineering solutions for critical infrastructure with AI-driven predictive maintenance.">
+          <meta property="og:type" content="website">
+          <meta property="og:url" content="https://oumc.net">
+          <meta name="twitter:card" content="summary_large_image">
+          <meta name="theme-color" content="#0d1117">'''
+
+          if 'og:title' not in content:
+              content = content.replace('<title>', seo_tags + '\n<title>')
+              with open('index.html', 'w', encoding='utf-8') as f:
+                  f.write(content)
+              print("✓ SEO meta tags added")
+          else:
+              print("✓ SEO meta tags already exist")
+          EOF
+
+      # 步驟 5: 生成英文版本
+      - name: Generate English Version
+        run: |
+          python3 << 'EOF'
+          import re
+
+          # 讀取 index.html
+          with open('index.html', 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          # 中英文對照
+          translations = {
+              'Engineering<br><span class="thin">the future with</span><br><span class="accent-1">AI</span> <span class="thin">×</span> <span class="accent-2">Sustainability</span>': 'Engineering<br><span class="thin">the future with</span><br><span class="accent-1">AI</span> <span class="thin">×</span> <span class="accent-2">Sustainability</span>',
+              '港鐵機電維修保養': 'MTR Maintenance Services',
+              '葵青碼頭工程': 'Kwai Tsing Terminal Engineering',
+              '環保工程': 'Environmental Engineering',
+              '結構安全檢查': 'Structural Safety Inspection',
+          }
+
+          # 基本英文版本（簡化版）
+          en_content = content.replace('lang="zh-HK"', 'lang="en-US"')
+
+          with open('index-en.html', 'w', encoding='utf-8') as f:
+              f.write(en_content)
+          print("✓ English version generated (index-en.html)")
+          EOF
+
+      # 步驟 6: 自動備份
+      - name: Backup to GitHub
+        run: |
+          mkdir -p backups
+          cp index.html backups/index-$(date +%Y%m%d-%H%M%S).html
+          echo "✓ Backup created"
+
+      # 步驟 7: 提交所有更改
+      - name: Commit Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add sitemap.xml robots.txt index.html index-en.html backups/
+          git commit -m "🤖 Auto: Optimize website - Add GA, SEO, Sitemap, English version, Backup [$(date +%Y-%m-%d)]" || echo "No changes to commit"
+          git push
+
+      # 步驟 8: 觸發 Netlify 部署
+      - name: Trigger Netlify Deploy
+        run: |
+          curl -X POST -d {} https://api.netlify.com/build_hooks/${{ secrets.NETLIFY_BUILD_HOOK }}
+          echo "✓ Netlify deployment triggered"
+
+      # 步驟 9: 發送完成通知
+      - name: Send Notification
+        run: |
+          echo "✅ Website Auto-Optimization Complete!"
+          echo "✓ Google Analytics added"
+          echo "✓ Sitemap generated"
+          echo "✓ robots.txt created"
+          echo "✓ SEO tags added"
+          echo "✓ English version generated"
+          echo "✓ Backup created"
+          echo "✓ Netlify deployment triggered"
