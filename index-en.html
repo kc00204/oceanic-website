@@ -144,7 +144,7 @@
 
   /* ══ SERVICES BENTO ══ */
   .bento { display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
-  .card { background:var(--bg); padding:38px; min-height:270px; display:flex; flex-direction:column; justify-content:space-between; transition:background .35s; position:relative; overflow:hidden; }
+  .card { background:var(--bg); padding:38px; min-height:270px; display:flex; flex-direction:column; justify-content:space-between; transition:background .35s; position:relative; overflow:hidden; text-decoration:none; color:inherit; }
   .card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(56,189,248,.07) 0%,transparent 60%); opacity:0; transition:opacity .4s; }
   .card:hover { background:var(--bg3); }
   .card:hover::before { opacity:1; }
@@ -155,7 +155,7 @@
   .card-n   { font-family:'Space Grotesk'; font-size:.62rem; letter-spacing:2px; color:var(--fg3); }
   .card-arr { color:var(--fg3); font-size:1rem; transition:.3s; }
   .card:hover .card-arr { color:var(--blue); transform:translate(4px,-4px); }
-  .card-title { font-size:1.25rem; font-weight:700; line-height:1.3; margin-bottom:10px; margin-top:36px; }
+  .card-title { font-size:clamp(1rem,2.5vw,1.25rem); font-weight:700; line-height:1.3; margin-bottom:10px; margin-top:36px; }
   .card-title .tag { display:block; font-family:'Space Grotesk'; font-size:.62rem; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px; font-weight:600; }
   .card-desc { font-size:.86rem; line-height:1.65; color:var(--fg2); }
 
@@ -420,46 +420,46 @@
     <h2 class="sec-title r">What we<br><span class="ghost">deliver</span><span class="col-b">.</span></h2>
   </div>
   <div class="bento r">
-    <div class="card w3" style="background:linear-gradient(135deg,rgba(56,189,248,.06) 0%,var(--bg) 60%);">
+    <a class="card w3" href="https://www.emsd.gov.hk/en/home/index.html" target="_blank" style="background:linear-gradient(135deg,rgba(56,189,248,.06) 0%,var(--bg) 60%);">
       <div class="card-top"><div class="card-n">(01)</div><div class="card-arr">↗</div></div>
       <div>
         <div class="card-title">
-          <span class="tag"><a href="https://www.emsd.gov.hk/en/home/index.html" target="_blank" style="color:inherit;">LICENSED ELECTRICAL CONTRACTING</a></span>
+          <span class="tag">LICENSED ELECTRICAL CONTRACTING</span>
           Electrical Engineering
         </div>
         <p class="card-desc">Bespoke power system design and supply solutions. Large-scale electrical installation, cable replacement, power upgrades and routine maintenance. Licensed under the Hong Kong Electricity Ordinance, covering comprehensive solutions from 380V to 11kV.</p>
       </div>
-    </div>
-    <div class="card w3">
+    </a>
+    <a class="card w3" href="https://www.mtr.com.hk/en/corporate/investor/index.html" target="_blank">
       <div class="card-top"><div class="card-n">(02)</div><div class="card-arr">↗</div></div>
       <div>
         <div class="card-title">
-          <span class="tag"><a href="https://www.mtr.com.hk/en/customer/main/index.html" target="_blank" style="color:inherit;">MTR MAINTENANCE</a></span>
+          <span class="tag">MTR MAINTENANCE</span>
           MTR M&E Maintenance
         </div>
         <p class="card-desc">Scheduled maintenance programmes for MTR mechanical and electrical equipment, 24/7 emergency repair services, and authorised original-equipment material supply. Our specialist team ensures all systems remain stable and operational.</p>
       </div>
-    </div>
-    <div class="card w2">
+    </a>
+    <a class="card w2" href="https://www.modernterminals.com/" target="_blank">
       <div class="card-top"><div class="card-n">(03)</div><div class="card-arr">↗</div></div>
       <div>
         <div class="card-title">
-          <span class="tag"><a href="https://www.modernterminals.com/" target="_blank" style="color:inherit;">MTL CONTAINER TERMINAL</a></span>
+          <span class="tag">MTL CONTAINER TERMINAL</span>
           Container Terminal Engineering
         </div>
         <p class="card-desc" style="font-size:.82rem;">Integrated mechanical, electrical and structural engineering services for port operations.</p>
       </div>
-    </div>
-    <div class="card w2">
+    </a>
+    <a class="card w2" href="https://www.tpark.hk/en/" target="_blank">
       <div class="card-top"><div class="card-n">(04)</div><div class="card-arr">↗</div></div>
       <div>
         <div class="card-title">
-          <span class="tag"><a href="https://www.tpark.hk/en/" target="_blank" style="color:inherit;">EPD · T·PARK</a></span>
+          <span class="tag">EPD · T·PARK</span>
           Environmental Engineering
         </div>
         <p class="card-desc" style="font-size:.82rem;">Mechanical and electrical maintenance for environmental protection facilities.</p>
       </div>
-    </div>
+    </a>
     <div class="card w2">
       <div class="card-top"><div class="card-n">(05)</div><div class="card-arr">↗</div></div>
       <div>
@@ -470,7 +470,7 @@
     <div class="card w6">
       <div class="card-top"><div class="card-n">(06) — LATEST INNOVATION</div><div class="card-arr">↗</div></div>
       <div>
-        <div class="card-title" style="font-size:1.9rem;"><span class="tag">AI + MACHINE LEARNING — PREDICTIVE MAINTENANCE</span>AI-Powered Predictive Maintenance System</div>
+        <div class="card-title"><span class="tag">AI + MACHINE LEARNING — PREDICTIVE MAINTENANCE</span>AI-Powered Predictive Maintenance System</div>
         <p class="card-desc" style="max-width:580px;">Integrating artificial intelligence into traditional engineering — through real-time data monitoring, fault-prediction algorithms, and intelligent facility management — to dramatically improve operational efficiency, extend equipment lifespan, and eliminate unplanned downtime.</p>
       </div>
     </div>
@@ -581,7 +581,7 @@
     <span class="thin">today.</span>
   </div>
   <div class="contact-cols r d1">
-    <div><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:oceanic952019@gmail.com">oceanic952019@gmail.com</a></div></div>
+    <div><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:kc00204@gmail.com">kc00204@gmail.com</a></div></div>
     <div><div class="c-lbl">Phone</div><div class="c-val"><a href="tel:+85291945675">(852) 9194-5675</a><br><a href="tel:+85223965338">(852) 2396-5338</a></div></div>
     <div><div class="c-lbl">Office</div><div class="c-val">G/F, 95 & 99 Kok Cheung St<br>Tai Kok Tsui, Kowloon, HK</div></div>
     <div><div class="c-lbl">Fax</div><div class="c-val">(852) 2787-2003</div></div>

@@ -287,6 +287,7 @@
     background:var(--bg); padding:38px; min-height:270px;
     display:flex; flex-direction:column; justify-content:space-between;
     transition:background .35s; position:relative; overflow:hidden;
+    text-decoration:none; color:inherit;
   }
   .card::before {
     content:''; position:absolute; inset:0;
@@ -302,7 +303,7 @@
   .card-n  { font-family:'Space Grotesk'; font-size:.62rem; letter-spacing:2px; color:var(--fg3); }
   .card-arr { color:var(--fg3); font-size:1rem; transition:.3s; }
   .card:hover .card-arr { color:var(--blue); transform:translate(4px,-4px); }
-  .card-title { font-size:1.25rem; font-weight:700; line-height:1.3; margin-bottom:10px; margin-top:36px; }
+  .card-title { font-size:clamp(1rem,2.5vw,1.25rem); font-weight:700; line-height:1.3; margin-bottom:10px; margin-top:36px; }
   .card-title .en {
     display:block; font-family:'Space Grotesk'; font-size:.62rem;
     letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px; font-weight:600;
@@ -587,7 +588,7 @@
   <div class="overlay"></div>
   <div class="ps-content">
     <div class="hero-meta r">
-      <span>Oceanic United Machinery Company Ltd.</span>
+      <span>海聯</span>
       <div class="hero-badge"><span class="dot-live"></span>EST. 1983 · 40+ YEARS</div>
     </div>
     <h1 class="hero-headline r">
@@ -638,7 +639,7 @@
   </div>
   <div class="about-grid">
     <div class="r">
-      <p>Oceanic United Machinery Company Ltd. 紮根香港，專注於為大型基礎設施提供 <strong>人工智能監測服務、海底工程、機電維修、結構檢查、更換及維修路軌、更換鋼絲繩、家居裝修及室外防水</strong>等多元項目提供專業工程解決方案。</p>
+      <p>海聯紮根香港，專注於為大型基礎設施提供 <strong>人工智能監測服務、海底工程、機電維修、結構檢查、更換及維修路軌、更換鋼絲繩、家居裝修及室外防水</strong>等多元項目提供專業工程解決方案。</p>
       <p>我們由 <strong>Kwok Yu Cheng</strong> 董事領導，團隊中擁有 <strong>特許工程師 (Chartered Engineer)</strong> 及 <strong>機械工程師 (Mechanical Engineer)</strong> 資格，持有香港政府認可嘅電業承辦商牌照，並為原廠認可物料供應商。</p>
       <p>多年來服務貨櫃碼頭、環境保護署、港鐵等重要客戶，致力以高標準工程質量，守護香港嘅每一個齒輪。透過人工智能與物聯網技術，我們正在重新定義工程維護的未來。</p>
     </div>
@@ -667,34 +668,34 @@
     <h2 class="sec-title r">我們提供<br><span class="ghost">的服務</span><span class="col-b">。</span></h2>
   </div>
   <div class="bento r">
-    <div class="card w3" style="background:linear-gradient(135deg,rgba(56,189,248,.06) 0%,var(--bg) 60%);">
+    <a class="card w3" href="https://www.emsd.gov.hk/tc/home/index.html" target="_blank" style="background:linear-gradient(135deg,rgba(56,189,248,.06) 0%,var(--bg) 60%);">
       <div class="card-top"><div class="card-n">(01)</div><div class="card-arr">↗</div></div>
       <div>
-        <div class="card-title"><span class="en"><a href="https://www.emsd.gov.hk/tc/home/index.html" target="_blank" style="color:inherit;">LICENSED ELECTRICAL CONTRACTING</a></span><a href="https://www.emsd.gov.hk/tc/home/index.html" target="_blank" style="color:inherit;">電業承辦工程</a></div>
+        <div class="card-title"><span class="en">LICENSED ELECTRICAL CONTRACTING</span>電業承辦工程</div>
         <p class="card-desc">為客戶度身訂造不同嘅電力系統及物料解決方案。大型電力系統安裝、線纜更換、電力升級及日常維護。依據香港《電業條例》持牌承辦，提供由 380V 至 11kV 嘅全面電力解決方案。</p>
       </div>
-    </div>
-    <div class="card w3">
+    </a>
+    <a class="card w3" href="https://www.mtr.com.hk/en/corporate/investor/index.html" target="_blank">
       <div class="card-top"><div class="card-n">(02)</div><div class="card-arr">↗</div></div>
       <div>
-        <div class="card-title"><span class="en"><a href="https://www.mtr.com.hk/en/customer/main/index.html" target="_blank" style="color:inherit;">MTR MAINTENANCE</a></span><a href="https://www.mtr.com.hk/en/customer/main/index.html" target="_blank" style="color:inherit;">港鐵機電維修保養</a></div>
+        <div class="card-title"><span class="en">MTR MAINTENANCE</span>港鐵機電維修保養</div>
         <p class="card-desc">為港鐵提供機電設備定期保養計劃、24/7 緊急搶修及原廠認可物料供應。專業團隊確保所有系統穩定運行，保障港鐵日常營運。</p>
       </div>
-    </div>
-    <div class="card w2">
+    </a>
+    <a class="card w2" href="https://www.modernterminals.com/" target="_blank">
       <div class="card-top"><div class="card-n">(03)</div><div class="card-arr">↗</div></div>
       <div>
-        <div class="card-title"><span class="en"><a href="https://www.modernterminals.com/" target="_blank" style="color:inherit;">MTL CONTAINER TERMINAL</a></span><a href="https://www.modernterminals.com/" target="_blank" style="color:inherit;">貨櫃碼頭工程</a></div>
+        <div class="card-title"><span class="en">MTL CONTAINER TERMINAL</span>貨櫃碼頭工程</div>
         <p class="card-desc" style="font-size:.82rem;">機械、電力及結構工程一體化服務</p>
       </div>
-    </div>
-    <div class="card w2">
+    </a>
+    <a class="card w2" href="https://www.tpark.hk/en/" target="_blank">
       <div class="card-top"><div class="card-n">(04)</div><div class="card-arr">↗</div></div>
       <div>
-        <div class="card-title"><span class="en"><a href="https://www.tpark.hk/en/" target="_blank" style="color:inherit;">EPD · T·PARK</a></span><a href="https://www.tpark.hk/en/" target="_blank" style="color:inherit;">環保工程</a></div>
+        <div class="card-title"><span class="en">EPD · T·PARK</span>環保工程</div>
         <p class="card-desc" style="font-size:.82rem;">環境設施機械及電力維護</p>
       </div>
-    </div>
+    </a>
     <div class="card w2">
       <div class="card-top"><div class="card-n">(05)</div><div class="card-arr">↗</div></div>
       <div>
@@ -705,7 +706,7 @@
     <div class="card w6">
       <div class="card-top"><div class="card-n">(06) — 最新創新</div><div class="card-arr">↗</div></div>
       <div>
-        <div class="card-title" style="font-size:1.9rem;"><span class="en">AI + MACHINE LEARNING — PREDICTIVE MAINTENANCE</span>人工智能預測性維護系統</div>
+        <div class="card-title"><span class="en">AI + MACHINE LEARNING — PREDICTIVE MAINTENANCE</span>人工智能預測性維護系統</div>
         <p class="card-desc" style="max-width:580px;">將人工智能技術融入傳統工程，透過實時數據監測、故障預測算法及智慧化設施管理，大幅提升營運效率、延長設備壽命並減少非預期停機時間。</p>
       </div>
     </div>
@@ -816,7 +817,7 @@
     <span class="thin">從今天開始。</span>
   </div>
   <div class="contact-cols r d1">
-    <div><div class="c-lbl">電郵</div><div class="c-val"><a href="mailto:oceanic952019@gmail.com">oceanic952019@gmail.com</a></div></div>
+    <div><div class="c-lbl">電郵</div><div class="c-val"><a href="mailto:kc00204@gmail.com">kc00204@gmail.com</a></div></div>
     <div><div class="c-lbl">電話</div><div class="c-val"><a href="tel:+85291945675">(852) 9194-5675</a><br><a href="tel:+85223965338">(852) 2396-5338</a></div></div>
     <div><div class="c-lbl">辦公室</div><div class="c-val">G/F, 95 & 99 Kok Cheung St<br>Tai Kok Tsui, Kowloon</div></div>
     <div><div class="c-lbl">傳真</div><div class="c-val">(852) 2787-2003</div></div>
@@ -856,7 +857,7 @@
     <a href="#contact">聯絡我們</a>
   </div>
   <div class="f-bottom">
-    <span>© 2024 Oceanic United Machinery Ltd. 版權所有。</span>
+    <span>© 2024 海聯 版權所有。</span>
     <span>EST. 1983 · HONG KONG</span>
   </div>
 </footer>
