@@ -464,6 +464,7 @@
   @media(max-width:768px) {
     nav { padding:14px 20px; }
     nav ul { display:none; }
+    .nav-time { display:none; }
     .dark-section { padding:80px 20px; }
     .hero .ps-content { padding:110px 20px 48px; }
     .hero-bottom { grid-template-columns:1fr; gap:28px; }
@@ -478,7 +479,68 @@
     footer { padding:56px 20px 28px; }
     .pb { height:55vh; min-height:320px; }
     .pb-quote { font-size:clamp(1.4rem,5vw,2.2rem); }
+    /* iOS parallax fix */
+    .photo-section { background-attachment:scroll; }
+    /* Hide custom cursor on touch */
+    #cur, #cur-ring { display:none; }
+    /* Show hamburger */
+    .hamburger { display:flex; }
+    /* Smaller hero headline on phones */
+    .hero-headline { font-size:clamp(2.8rem,14vw,5rem); }
+    .sec-title { font-size:clamp(2rem,9vw,3.5rem); }
+    .hero-meta { flex-direction:column; align-items:flex-start; gap:10px; margin-bottom:32px; }
+    .cap-grid { grid-template-columns:1fr; }
   }
+  @media(max-width:480px) {
+    .stats-grid { grid-template-columns:1fr; }
+    .bento { gap:10px; }
+    .brand-text { font-size:.85rem; }
+  }
+
+  /* ══ HAMBURGER ══ */
+  .hamburger {
+    display:none; flex-direction:column; justify-content:center;
+    gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:101;
+  }
+  .hamburger span {
+    display:block; width:22px; height:2px;
+    background:var(--fg); border-radius:2px; transition:all .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+  /* ══ MOBILE MENU ══ */
+  .mob-menu {
+    position:fixed; top:0; right:-100%; width:min(300px,85vw); height:100vh;
+    background:rgba(6,6,6,.97); backdrop-filter:blur(24px);
+    z-index:200; padding:90px 32px 48px;
+    transition:right .35s cubic-bezier(.4,0,.2,1);
+    border-left:1px solid var(--line);
+    display:flex; flex-direction:column; gap:40px;
+  }
+  .mob-menu.open { right:0; }
+  .mob-menu ul { list-style:none; display:flex; flex-direction:column; gap:28px; }
+  .mob-menu ul a {
+    font-family:'Space Grotesk'; font-size:1.25rem; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; color:var(--fg);
+    display:flex; align-items:center; gap:10px;
+    transition:color .2s;
+  }
+  .mob-menu ul a:hover { color:var(--green); }
+  .mob-menu ul a .n { color:var(--green); font-size:.75rem; }
+  .mob-lang { margin-top:auto; }
+  .mob-lang a {
+    font-family:'Space Grotesk'; font-size:.7rem; letter-spacing:2px;
+    text-transform:uppercase; color:var(--blue); font-weight:600;
+    padding:8px 18px; border:1px solid rgba(56,189,248,.3);
+    border-radius:4px; display:inline-block;
+  }
+  .mob-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,.55);
+    z-index:199; opacity:0; pointer-events:none; transition:opacity .35s;
+  }
+  .mob-overlay.open { opacity:1; pointer-events:all; }
 </style>
 </head>
 <body>
@@ -492,17 +554,33 @@
     <div class="brand-text">Oceanic United<small>Engineering · AI · HK</small></div>
   </div>
   <ul>
-    <li><a href="#about"><span class="n">01</span>About</a></li>
-    <li><a href="#services"><span class="n">02</span>Services</a></li>
-    <li><a href="#projects"><span class="n">03</span>Projects</a></li>
-    <li><a href="#partners"><span class="n">04</span>Partners</a></li>
-    <li><a href="#contact"><span class="n">05</span>Contact</a></li>
+    <li><a href="#about"><span class="n">01</span>關於我們</a></li>
+    <li><a href="#services"><span class="n">02</span>服務項目</a></li>
+    <li><a href="#projects"><span class="n">03</span>工程項目</a></li>
+    <li><a href="#partners"><span class="n">04</span>合作夥伴</a></li>
+    <li><a href="#contact"><span class="n">05</span>聯絡我們</a></li>
   </ul>
   <div class="nav-r">
     <div class="nav-time"><div class="dot-live"></div><span id="hkt">HK · LIVE</span></div>
     <a href="index-en.html" class="lang-btn">ENG</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <ul>
+    <li><a href="#about" class="mob-link"><span class="n">01</span>關於我們</a></li>
+    <li><a href="#services" class="mob-link"><span class="n">02</span>服務項目</a></li>
+    <li><a href="#projects" class="mob-link"><span class="n">03</span>工程項目</a></li>
+    <li><a href="#partners" class="mob-link"><span class="n">04</span>合作夥伴</a></li>
+    <li><a href="#contact" class="mob-link"><span class="n">05</span>聯絡我們</a></li>
+  </ul>
+  <div class="mob-lang"><a href="index-en.html">ENG →</a></div>
+</div>
+<div class="mob-overlay" id="mobOverlay"></div>
 
 <!-- ░░░ HERO — PHOTO 1: Container Port ░░░ -->
 <div class="photo-section hero">
@@ -513,50 +591,50 @@
       <div class="hero-badge"><span class="dot-live"></span>EST. 1983 · 40+ YEARS</div>
     </div>
     <h1 class="hero-headline r">
-      Engineering<br>
-      <span class="ghost">the&nbsp;future</span><br>
+      工程<br>
+      <span class="ghost">未&nbsp;來</span><br>
       <span class="col-b">AI</span> <span class="thin">×</span>
-      <span class="col-g">Sustain<br>ability</span>
+      <span class="col-g">可持續<br>發展</span>
     </h1>
     <div class="hero-bottom">
       <div class="r d1">
-        <div class="lbl">Next Generation</div>
-        <p>AI-driven predictive maintenance, autonomous inspection systems, intelligent resource optimization</p>
+        <div class="lbl">新一代科技</div>
+        <p>AI 驅動預測性維護、自主檢查系統、智能資源優化</p>
       </div>
       <div class="r d2">
-        <div class="lbl">Port · Container · Infrastructure</div>
-        <p>Kwai Tsing Terminal, T·PARK Environmental, MTR Operations, Structural Safety</p>
+        <div class="lbl">港口 · 貨櫃 · 基礎設施</div>
+        <p>葵青貨櫃碼頭、T·PARK 環保設施、港鐵運營、結構安全</p>
       </div>
       <div class="r d3">
-        <div class="lbl">24 / 7 Global Ready</div>
-        <p>Real-time monitoring, emergency response, mission-critical systems, sustainability compliance</p>
+        <div class="lbl">24 / 7 全天候</div>
+        <p>實時監控、緊急應變、關鍵任務系統、環保合規</p>
       </div>
     </div>
-    <div class="scroll-hint">SCROLL</div>
+    <div class="scroll-hint">向下滾動</div>
   </div>
 </div>
 
 <!-- MARQUEE -->
 <div class="marquee">
   <div class="marquee-track">
-    <span>AI PREDICTIVE MAINTENANCE</span>
-    <span>PORT AUTOMATION</span>
-    <span>ENVIRONMENTAL SYSTEMS</span>
-    <span>SMART INFRASTRUCTURE</span>
-    <span>STRUCTURAL INTELLIGENCE</span>
-    <span>AI PREDICTIVE MAINTENANCE</span>
-    <span>PORT AUTOMATION</span>
-    <span>ENVIRONMENTAL SYSTEMS</span>
-    <span>SMART INFRASTRUCTURE</span>
-    <span>STRUCTURAL INTELLIGENCE</span>
+    <span>人工智能預測性維護</span>
+    <span>港口自動化</span>
+    <span>環境保護系統</span>
+    <span>智慧基礎設施</span>
+    <span>結構智慧監測</span>
+    <span>人工智能預測性維護</span>
+    <span>港口自動化</span>
+    <span>環境保護系統</span>
+    <span>智慧基礎設施</span>
+    <span>結構智慧監測</span>
   </div>
 </div>
 
 <!-- ABOUT -->
 <div class="dark-section" id="about" style="border-top:1px solid var(--line);">
   <div class="sec-head">
-    <div class="sec-num">01 / ABOUT</div>
-    <h2 class="sec-title r">Next-gen engineering<br><span class="thin">for Hong Kong's critical</span> <span class="col-b">infrastructure.</span></h2>
+    <div class="sec-num">01 / 關於我們</div>
+    <h2 class="sec-title r">新一代工程<br><span class="thin">為香港重要</span> <span class="col-b">基礎設施而生。</span></h2>
   </div>
   <div class="about-grid">
     <div class="r">
@@ -565,10 +643,10 @@
       <p>多年來服務貨櫃碼頭、環境保護署、港鐵等重要客戶，致力以高標準工程質量，守護香港嘅每一個齒輪。透過人工智能與物聯網技術，我們正在重新定義工程維護的未來。</p>
     </div>
     <div class="stats-grid r d1">
-      <div class="stat"><div class="stat-n">40<span class="acc">+</span></div><div class="stat-l">Years Experience</div></div>
-      <div class="stat"><div class="stat-n">100K<span class="acc">+</span></div><div class="stat-l">Projects Delivered</div></div>
-      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Emergency Response</div></div>
-      <div class="stat"><div class="stat-n">100<span class="acc">%</span></div><div class="stat-l">Licensed & Certified</div></div>
+      <div class="stat"><div class="stat-n">40<span class="acc">+</span></div><div class="stat-l">年工程經驗</div></div>
+      <div class="stat"><div class="stat-n">100K<span class="acc">+</span></div><div class="stat-l">完成項目</div></div>
+      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">緊急應變</div></div>
+      <div class="stat"><div class="stat-n">100<span class="acc">%</span></div><div class="stat-l">持牌認證</div></div>
     </div>
   </div>
 </div>
@@ -577,16 +655,16 @@
 <div class="photo-section pb pb-1">
   <div class="overlay"></div>
   <div class="ps-content r">
-    <div class="pb-label">Engineering Excellence</div>
-    <div class="pb-quote">Built for <span class="col-b">precision.</span><br>Designed for <span class="col-g">the long run.</span></div>
+    <div class="pb-label">工程卓越</div>
+    <div class="pb-quote">精密建造<span class="col-b">每個細節。</span><br>設計<span class="col-g">經得起時間考驗。</span></div>
   </div>
 </div>
 
 <!-- SERVICES -->
 <div class="dark-section" id="services" style="background:var(--bg2); border-top:1px solid var(--line);">
   <div class="sec-head">
-    <div class="sec-num">02 / SERVICES</div>
-    <h2 class="sec-title r">What we<br><span class="ghost">deliver</span><span class="col-b">.</span></h2>
+    <div class="sec-num">02 / 服務項目</div>
+    <h2 class="sec-title r">我們提供<br><span class="ghost">的服務</span><span class="col-b">。</span></h2>
   </div>
   <div class="bento r">
     <div class="card w3" style="background:linear-gradient(135deg,rgba(56,189,248,.06) 0%,var(--bg) 60%);">
@@ -625,7 +703,7 @@
       </div>
     </div>
     <div class="card w6">
-      <div class="card-top"><div class="card-n">(06) — LATEST INNOVATION</div><div class="card-arr">↗</div></div>
+      <div class="card-top"><div class="card-n">(06) — 最新創新</div><div class="card-arr">↗</div></div>
       <div>
         <div class="card-title" style="font-size:1.9rem;"><span class="en">AI + MACHINE LEARNING — PREDICTIVE MAINTENANCE</span>人工智能預測性維護系統</div>
         <p class="card-desc" style="max-width:580px;">將人工智能技術融入傳統工程，透過實時數據監測、故障預測算法及智慧化設施管理，大幅提升營運效率、延長設備壽命並減少非預期停機時間。</p>
@@ -638,50 +716,50 @@
 <div class="photo-section pb pb-2">
   <div class="overlay"></div>
   <div class="ps-content r">
-    <div class="pb-label">24 / 7 Operations</div>
-    <div class="pb-quote"><span class="col-g">AI-driven</span> systems<br>that never sleep.</div>
+    <div class="pb-label">全天候運作</div>
+    <div class="pb-quote"><span class="col-g">AI 驅動</span>系統<br>永不停歇。</div>
   </div>
 </div>
 
 <!-- PROJECTS -->
 <div class="dark-section" id="projects" style="border-top:1px solid var(--line);">
   <div class="sec-head">
-    <div class="sec-num">03 / SELECTED</div>
-    <h2 class="sec-title r">Selected<br><span class="thin">commissions.</span></h2>
+    <div class="sec-num">03 / 精選項目</div>
+    <h2 class="sec-title r">精選<br><span class="thin">工程項目。</span></h2>
   </div>
   <div class="proj-list">
     <div class="proj-row r">
       <div class="proj-id">001</div>
       <div class="proj-name">Kwai Tsing Container Terminal<span>葵青貨櫃碼頭機電工程</span></div>
-      <div class="proj-cat">Mechanical · Electrical · Structural</div>
+      <div class="proj-cat">機械 · 電力 · 結構</div>
       <div class="proj-yr">2024</div>
       <div class="proj-arr">↗</div>
     </div>
     <div class="proj-row r d1">
       <div class="proj-id">002</div>
       <div class="proj-name">Hong Kong International Airport Expansion<span>香港國際機場擴建工程</span></div>
-      <div class="proj-cat">Electrical · Control Systems</div>
+      <div class="proj-cat">電力 · 控制系統</div>
       <div class="proj-yr">2023</div>
       <div class="proj-arr">↗</div>
     </div>
     <div class="proj-row r d2">
       <div class="proj-id">003</div>
-      <div class="proj-name">Environmental Protection Dept. T·Park<span>環境保護署 T·PARK 設施維保</span></div>
-      <div class="proj-cat">Maintenance · Optimization</div>
+      <div class="proj-name">環境保護署 T·Park<span>環境保護署 T·PARK 設施維保</span></div>
+      <div class="proj-cat">維護 · 優化</div>
       <div class="proj-yr">2023</div>
       <div class="proj-arr">↗</div>
     </div>
     <div class="proj-row r d2">
       <div class="proj-id">004</div>
-      <div class="proj-name">MTR Emergency Response & System Integrity<span>港鐵應急與系統完整性維護</span></div>
-      <div class="proj-cat">24/7 Critical Support</div>
-      <div class="proj-yr">Ongoing</div>
+      <div class="proj-name">港鐵緊急應變及系統完整性維護<span>港鐵應急與系統完整性維護</span></div>
+      <div class="proj-cat">24小時緊急支援</div>
+      <div class="proj-yr">持續進行</div>
       <div class="proj-arr">↗</div>
     </div>
     <div class="proj-row r d3">
       <div class="proj-id">005</div>
-      <div class="proj-name">AI-Powered Structural Monitoring System<span>人工智能結構監測系統</span></div>
-      <div class="proj-cat">Innovation · Analytics</div>
+      <div class="proj-name">人工智能結構監測系統<span>人工智能結構監測系統</span></div>
+      <div class="proj-cat">創新 · 數據分析</div>
       <div class="proj-yr">2024</div>
       <div class="proj-arr">↗</div>
     </div>
@@ -693,55 +771,55 @@
   <div class="overlay"></div>
   <div class="ps-content r">
     <div class="pb-label">Hong Kong · 23 Aug 1983</div>
-    <div class="pb-quote">Guarding every gear<br>in <span class="col-b">Hong Kong's</span> <span class="col-g">infrastructure.</span></div>
+    <div class="pb-quote">守護每一個齒輪<br>在<span class="col-b">香港</span>嘅<span class="col-g">基礎設施中。</span></div>
   </div>
 </div>
 
 <!-- PARTNERS -->
 <div class="dark-section" id="partners" style="border-top:1px solid var(--line);">
   <div class="sec-head">
-    <div class="sec-num">04 / PARTNERS</div>
-    <h2 class="sec-title r">Strategic<br><span class="thin">collaborations.</span></h2>
+    <div class="sec-num">04 / 合作夥伴</div>
+    <h2 class="sec-title r">策略性<br><span class="thin">合作關係。</span></h2>
   </div>
   <div class="partner-grid r">
-    <div class="p-card"><div class="p-logo">🏗️</div><div class="p-name">Kwai Tsing Container Terminal</div><div class="p-role">Strategic Partner</div><div class="p-desc">綜合港口機械及電力系統整合，提供一體化工程解決方案。</div></div>
-    <div class="p-card"><div class="p-logo">🌱</div><div class="p-name">EPD · T·PARK Facility</div><div class="p-role">Environmental Partner</div><div class="p-desc">環境保護署認可供應商，專注可持續性與環境合規。</div></div>
-    <div class="p-card"><div class="p-logo">🚇</div><div class="p-name">MTR Operations</div><div class="p-role">Maintenance Contract</div><div class="p-desc">為港鐵提供機電設備維護、應急搶修及原廠物料支援。</div></div>
-    <div class="p-card"><div class="p-logo">⚙️</div><div class="p-name">MTL (Modern Terminals Ltd)</div><div class="p-role">Port Operations Partner</div><div class="p-desc">港口設備維護、機械維修及系統優化服務。</div></div>
-    <div class="p-card"><div class="p-logo">🚢</div><div class="p-name">HIT (HK International Terminals)</div><div class="p-role">Terminal Services Provider</div><div class="p-desc">貨櫃碼頭工程、設備維保及系統整合。</div></div>
-    <div class="p-card"><div class="p-logo">📦</div><div class="p-name">Cosco-HIT Terminals</div><div class="p-role">Collaborative Partner</div><div class="p-desc">中遠海運合作專案、碼頭機電工程及維保服務。</div></div>
-    <div class="p-card"><div class="p-logo">🔧</div><div class="p-name">Yard Way</div><div class="p-role">Maintenance Contractor</div><div class="p-desc">船舶及港口設施維修、電氣系統升級服務。</div></div>
-    <div class="p-card"><div class="p-logo">🏭</div><div class="p-name">VW-VES (Vessel Engineering)</div><div class="p-role">Engineering Partner</div><div class="p-desc">船舶工程、結構檢查及專業工程解決方案。</div></div>
+    <div class="p-card"><div class="p-logo">🏗️</div><div class="p-name">Kwai Tsing Container Terminal</div><div class="p-role">策略合作夥伴</div><div class="p-desc">綜合港口機械及電力系統整合，提供一體化工程解決方案。</div></div>
+    <div class="p-card"><div class="p-logo">🌱</div><div class="p-name">EPD · T·PARK Facility</div><div class="p-role">環保合作夥伴</div><div class="p-desc">環境保護署認可供應商，專注可持續性與環境合規。</div></div>
+    <div class="p-card"><div class="p-logo">🚇</div><div class="p-name">MTR Operations</div><div class="p-role">維保合約</div><div class="p-desc">為港鐵提供機電設備維護、應急搶修及原廠物料支援。</div></div>
+    <div class="p-card"><div class="p-logo">⚙️</div><div class="p-name">MTL (Modern Terminals Ltd)</div><div class="p-role">港口運營夥伴</div><div class="p-desc">港口設備維護、機械維修及系統優化服務。</div></div>
+    <div class="p-card"><div class="p-logo">🚢</div><div class="p-name">HIT (HK International Terminals)</div><div class="p-role">碼頭服務供應商</div><div class="p-desc">貨櫃碼頭工程、設備維保及系統整合。</div></div>
+    <div class="p-card"><div class="p-logo">📦</div><div class="p-name">Cosco-HIT Terminals</div><div class="p-role">協作合作夥伴</div><div class="p-desc">中遠海運合作專案、碼頭機電工程及維保服務。</div></div>
+    <div class="p-card"><div class="p-logo">🔧</div><div class="p-name">Yard Way</div><div class="p-role">維修承辦商</div><div class="p-desc">船舶及港口設施維修、電氣系統升級服務。</div></div>
+    <div class="p-card"><div class="p-logo">🏭</div><div class="p-name">VW-VES</div><div class="p-role">工程合作夥伴</div><div class="p-desc">結構檢查及專業工程解決方案。</div></div>
   </div>
 </div>
 
 <!-- CAPABILITIES -->
 <div class="dark-section" id="capabilities" style="border-top:1px solid var(--line);">
   <div class="sec-head">
-    <div class="sec-num">05 / CAPABILITIES</div>
-    <h2 class="sec-title r">Technical<br><span class="thin">excellence.</span></h2>
+    <div class="sec-num">05 / 能力資質</div>
+    <h2 class="sec-title r">技術<br><span class="thin">卓越。</span></h2>
   </div>
   <div class="cap-list r" style="max-width:800px;">
-    <div class="cap-row"><div class="cap-name">Licensed Electrical Contracting<small>Category 1 · Hong Kong</small></div><div class="cap-badge">✓ VERIFIED</div></div>
-    <div class="cap-row"><div class="cap-name">Structural Engineering & Assessment<small>ISO 17025 Accredited</small></div><div class="cap-badge">✓ CERTIFIED</div></div>
-    <div class="cap-row"><div class="cap-name">AI & Predictive Maintenance Systems<small>Real-time IoT Integration</small></div><div class="cap-badge">✓ ADVANCED</div></div>
-    <div class="cap-row"><div class="cap-name">24/7 Emergency Response<small>Mission-Critical Operations</small></div><div class="cap-badge">✓ OPERATIONAL</div></div>
-    <div class="cap-row"><div class="cap-name">Environmental Compliance<small>Hong Kong Regulations</small></div><div class="cap-badge">✓ COMPLIANT</div></div>
+    <div class="cap-row"><div class="cap-name">持牌電業承辦工程<small>第一類別 · 香港</small></div><div class="cap-badge">✓ 已認證</div></div>
+    <div class="cap-row"><div class="cap-name">結構工程及評估<small>ISO 17025 認可</small></div><div class="cap-badge">✓ 已認可</div></div>
+    <div class="cap-row"><div class="cap-name">人工智能及預測性維護系統<small>實時 IoT 整合</small></div><div class="cap-badge">✓ 先進技術</div></div>
+    <div class="cap-row"><div class="cap-name">24/7 緊急應變<small>關鍵任務運作</small></div><div class="cap-badge">✓ 全天候運作</div></div>
+    <div class="cap-row"><div class="cap-name">環保合規<small>香港法規標準</small></div><div class="cap-badge">✓ 符合規定</div></div>
   </div>
 </div>
 
 <!-- CONTACT -->
 <div class="dark-section" id="contact" style="border-top:1px solid var(--line);">
   <div class="contact-headline r">
-    Get in touch to explore<br>
-    <span class="col-b">tomorrow's infrastructure</span><br>
-    <span class="thin">today.</span>
+    聯繫我們，共同探索<br>
+    <span class="col-b">明日基礎設施</span><br>
+    <span class="thin">從今天開始。</span>
   </div>
   <div class="contact-cols r d1">
-    <div><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:oceanic952019@gmail.com">oceanic952019@gmail.com</a></div></div>
-    <div><div class="c-lbl">Phone</div><div class="c-val"><a href="tel:+85291945675">(852) 9194-5675</a><br><a href="tel:+85223965338">(852) 2396-5338</a></div></div>
-    <div><div class="c-lbl">Office</div><div class="c-val">G/F, 95 & 99 Kok Cheung St<br>Tai Kok Tsui, Kowloon</div></div>
-    <div><div class="c-lbl">Fax</div><div class="c-val">(852) 2787-2003</div></div>
+    <div><div class="c-lbl">電郵</div><div class="c-val"><a href="mailto:oceanic952019@gmail.com">oceanic952019@gmail.com</a></div></div>
+    <div><div class="c-lbl">電話</div><div class="c-val"><a href="tel:+85291945675">(852) 9194-5675</a><br><a href="tel:+85223965338">(852) 2396-5338</a></div></div>
+    <div><div class="c-lbl">辦公室</div><div class="c-val">G/F, 95 & 99 Kok Cheung St<br>Tai Kok Tsui, Kowloon</div></div>
+    <div><div class="c-lbl">傳真</div><div class="c-val">(852) 2787-2003</div></div>
   </div>
   <div class="form-wrap r d2">
     <h3>填寫表單聯繫我們</h3>
@@ -761,24 +839,24 @@
 <footer>
   <div class="f-brand">
     <div class="logo">Oceanic<br>United</div>
-    <p>Engineering Hong Kong's infrastructure through innovation, expertise, and unwavering commitment to excellence. AI-driven solutions for a sustainable future.</p>
+    <p>以創新、專業及卓越承諾，守護香港基礎設施每一個細節。AI 驅動解決方案，邁向可持續未來。</p>
   </div>
   <div class="f-col">
-    <h4>Services</h4>
-    <a href="#services">Electrical Contracting</a>
-    <a href="#services">MTR Maintenance</a>
-    <a href="#services">Structural Inspection</a>
-    <a href="#services">AI Monitoring</a>
+    <h4>服務項目</h4>
+    <a href="#services">電業承辦工程</a>
+    <a href="#services">港鐵機電維修</a>
+    <a href="#services">結構安全檢查</a>
+    <a href="#services">AI 監測系統</a>
   </div>
   <div class="f-col">
-    <h4>Company</h4>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#partners">Partners</a>
-    <a href="#contact">Contact</a>
+    <h4>公司</h4>
+    <a href="#about">關於我們</a>
+    <a href="#projects">工程項目</a>
+    <a href="#partners">合作夥伴</a>
+    <a href="#contact">聯絡我們</a>
   </div>
   <div class="f-bottom">
-    <span>© 2024 Oceanic United Machinery Ltd. All rights reserved.</span>
+    <span>© 2024 Oceanic United Machinery Ltd. 版權所有。</span>
     <span>EST. 1983 · HONG KONG</span>
   </div>
 </footer>
@@ -814,6 +892,16 @@
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); });
   },{threshold:0.12});
   document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+  /* MOBILE MENU */
+  const hamburger = document.getElementById('hamburger');
+  const mobMenu   = document.getElementById('mobMenu');
+  const mobOverlay= document.getElementById('mobOverlay');
+  function openMob()  { mobMenu.classList.add('open'); mobOverlay.classList.add('open'); hamburger.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeMob() { mobMenu.classList.remove('open'); mobOverlay.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow=''; }
+  hamburger.addEventListener('click', openMob);
+  mobOverlay.addEventListener('click', closeMob);
+  document.querySelectorAll('.mob-link').forEach(a=>a.addEventListener('click', closeMob));
 
   /* HERO immediate reveal */
   window.addEventListener('load',()=>{
